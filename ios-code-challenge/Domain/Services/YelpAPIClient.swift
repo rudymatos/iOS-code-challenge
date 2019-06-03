@@ -17,6 +17,7 @@ extension AFYelpAPIClient{
                 return
             }
             let yelpSearch = CCYelpPSearch(data: data)
+            
             completion(.success(yelpSearch))
         }) { (task, responseObject) in
             let error = CCError(message: "Invalid Results", type: .errorGettingBusinesses)

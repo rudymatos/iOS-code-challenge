@@ -32,7 +32,7 @@ class BusinessCell: UITableViewCell {
         nameLBL.text = business.name
         ratingLBL.text = "\(business.rating)"
         reviewCountLBL.text = "\(business.reviewCount)"
-        distanceLBL.text = "\(business.distance)"
+        distanceLBL.text = "Distance: \(business.distance)"
         categoriesLBL.text = business.categories.compactMap({$0.title}).joined(separator: ",")
         if let imageURL = business.imageThumbnail{
             businessIV.loadImage(withURL: imageURL)
