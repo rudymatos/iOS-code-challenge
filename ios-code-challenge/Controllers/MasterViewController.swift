@@ -12,36 +12,41 @@ class MasterViewController: UITableViewController {
     
     var detailViewController: DetailViewController?
     
-    lazy private var dataSource: NXTDataSource? = {
-        guard let dataSource = NXTDataSource(objects: nil) else { return nil }
-        dataSource.tableViewDidReceiveData = { [weak self] in
-            guard let strongSelf = self else { return }
+    lazy private var dataSource : YelpDataSource? = {
+       let dataSource = YelpDataSource(businesses: [])
+        dataSource.setObjectsCompletion = { [weak self] in
+            guard let strongSelf = self else {return}
             strongSelf.tableView.reloadData()
         }
         return dataSource
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        registerCells()
         tableView.dataSource = dataSource
         tableView.delegate = dataSource
         
         let query = YLPSearchQuery(location: "5550 West Executive Dr. Tampa, FL 33609")
-        AFYelpAPIClient.shared().search(with: query, completionHandler: { [weak self] (searchResult, error) in
-            guard let strongSelf = self,
-                let dataSource = strongSelf.dataSource,
-                let businesses = searchResult?.businesses else {
-                    return
+        AFYelpAPIClient.shared().search(with: query, completion: { [weak self] result in
+            guard let strongSelf = self else {return}
+            switch result{
+            case .success(let searchResults):
+                strongSelf.dataSource?.setObjects(businesses: searchResults.businesses)
+            case .failure(let error):
+                print(error)
             }
-            dataSource.setObjects(businesses)
-            strongSelf.tableView.reloadData()
         })
     }
     
     override func viewDidAppear(_ animated: Bool) {
         self.clearsSelectionOnViewWillAppear = self.splitViewController?.isCollapsed ?? false
         super.viewDidAppear(animated)
+    }
+    
+    func registerCells(){
+        tableView.register(UINib(nibName: "BusinessCell", bundle: Bundle.main), forCellReuseIdentifier: "businessCell")
     }
     
     // MARK: - Navigation

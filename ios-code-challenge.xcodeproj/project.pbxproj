@@ -23,12 +23,19 @@
 		C5CEF1C0201446C1009D1571 /* AFYelpAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = C5CEF1BF201446C1009D1571 /* AFYelpAPIClient.m */; };
 		C5CEF1C62014D6DB009D1571 /* AFYelpAPIClient+Search.m in Sources */ = {isa = PBXBuildFile; fileRef = C5CEF1C52014D6DB009D1571 /* AFYelpAPIClient+Search.m */; };
 		C5CEF1CA2014DB71009D1571 /* YLPSearchQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = C5CEF1C92014DB71009D1571 /* YLPSearchQuery.m */; };
-		C5CEF1CD2014DC36009D1571 /* YLPSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = C5CEF1CC2014DC36009D1571 /* YLPSearch.m */; };
-		C5CEF1D02014E1FD009D1571 /* YLPBusiness.m in Sources */ = {isa = PBXBuildFile; fileRef = C5CEF1CF2014E1FD009D1571 /* YLPBusiness.m */; };
 		C5CEF1D52015350A009D1571 /* NXTBusinessTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C5CEF1D32015350A009D1571 /* NXTBusinessTableViewCell.m */; };
 		C5CEF1D62015350A009D1571 /* NXTBusinessTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C5CEF1D42015350A009D1571 /* NXTBusinessTableViewCell.xib */; };
 		C5CEF1D92015354C009D1571 /* NXTBusinessTableViewCell+YLPBusiness.m in Sources */ = {isa = PBXBuildFile; fileRef = C5CEF1D82015354C009D1571 /* NXTBusinessTableViewCell+YLPBusiness.m */; };
 		C5CEF1DC20153618009D1571 /* YLPBusiness+CellForObject.m in Sources */ = {isa = PBXBuildFile; fileRef = C5CEF1DB20153618009D1571 /* YLPBusiness+CellForObject.m */; };
+		F55D209022A59CA60058AC79 /* CCYelpBusiness.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55D208F22A59CA60058AC79 /* CCYelpBusiness.swift */; };
+		F55D209322A59DD10058AC79 /* CCYelpPSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55D209222A59DD10058AC79 /* CCYelpPSearch.swift */; };
+		F55D209822A59F440058AC79 /* YLPSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D209622A59F440058AC79 /* YLPSearch.m */; };
+		F55D209922A59F440058AC79 /* YLPBusiness.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D209722A59F440058AC79 /* YLPBusiness.m */; };
+		F55D209B22A5A12D0058AC79 /* YelpAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55D209A22A5A12D0058AC79 /* YelpAPIClient.swift */; };
+		F55D209D22A5A59C0058AC79 /* CCError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55D209C22A5A59C0058AC79 /* CCError.swift */; };
+		F55D20A022A5AD780058AC79 /* BusinessCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55D209E22A5AD780058AC79 /* BusinessCell.swift */; };
+		F55D20A122A5AD780058AC79 /* BusinessCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F55D209F22A5AD780058AC79 /* BusinessCell.xib */; };
+		F55D20A322A5AF030058AC79 /* YelpDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55D20A222A5AF030058AC79 /* YelpDataSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,10 +89,6 @@
 		C5CEF1C52014D6DB009D1571 /* AFYelpAPIClient+Search.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AFYelpAPIClient+Search.m"; sourceTree = "<group>"; };
 		C5CEF1C82014DB71009D1571 /* YLPSearchQuery.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YLPSearchQuery.h; sourceTree = "<group>"; };
 		C5CEF1C92014DB71009D1571 /* YLPSearchQuery.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YLPSearchQuery.m; sourceTree = "<group>"; };
-		C5CEF1CB2014DC36009D1571 /* YLPSearch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YLPSearch.h; sourceTree = "<group>"; };
-		C5CEF1CC2014DC36009D1571 /* YLPSearch.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YLPSearch.m; sourceTree = "<group>"; };
-		C5CEF1CE2014E1FD009D1571 /* YLPBusiness.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YLPBusiness.h; sourceTree = "<group>"; };
-		C5CEF1CF2014E1FD009D1571 /* YLPBusiness.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YLPBusiness.m; sourceTree = "<group>"; };
 		C5CEF1D22015350A009D1571 /* NXTBusinessTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NXTBusinessTableViewCell.h; sourceTree = "<group>"; };
 		C5CEF1D32015350A009D1571 /* NXTBusinessTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NXTBusinessTableViewCell.m; sourceTree = "<group>"; };
 		C5CEF1D42015350A009D1571 /* NXTBusinessTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NXTBusinessTableViewCell.xib; sourceTree = "<group>"; };
@@ -95,6 +98,17 @@
 		C5CEF1DB20153618009D1571 /* YLPBusiness+CellForObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "YLPBusiness+CellForObject.m"; sourceTree = "<group>"; };
 		E98E17AF5F4AF737558F432A /* libPods-ios-code-challenge.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ios-code-challenge.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC3125ABF2066AA64D25CD6E /* Pods-ios-code-challengeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-code-challengeTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ios-code-challengeTests/Pods-ios-code-challengeTests.debug.xcconfig"; sourceTree = "<group>"; };
+		F55D208F22A59CA60058AC79 /* CCYelpBusiness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCYelpBusiness.swift; sourceTree = "<group>"; };
+		F55D209222A59DD10058AC79 /* CCYelpPSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCYelpPSearch.swift; sourceTree = "<group>"; };
+		F55D209422A59F440058AC79 /* YLPSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLPSearch.h; sourceTree = "<group>"; };
+		F55D209522A59F440058AC79 /* YLPBusiness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLPBusiness.h; sourceTree = "<group>"; };
+		F55D209622A59F440058AC79 /* YLPSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLPSearch.m; sourceTree = "<group>"; };
+		F55D209722A59F440058AC79 /* YLPBusiness.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLPBusiness.m; sourceTree = "<group>"; };
+		F55D209A22A5A12D0058AC79 /* YelpAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpAPIClient.swift; sourceTree = "<group>"; };
+		F55D209C22A5A59C0058AC79 /* CCError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCError.swift; sourceTree = "<group>"; };
+		F55D209E22A5AD780058AC79 /* BusinessCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessCell.swift; sourceTree = "<group>"; };
+		F55D209F22A5AD780058AC79 /* BusinessCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BusinessCell.xib; sourceTree = "<group>"; };
+		F55D20A222A5AF030058AC79 /* YelpDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpDataSource.swift; sourceTree = "<group>"; };
 		FE926015E1B4191E0337FDF0 /* libPods-ios-code-challengeUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ios-code-challengeUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -174,6 +188,7 @@
 		C5CEF1802013F25A009D1571 /* ios-code-challenge */ = {
 			isa = PBXGroup;
 			children = (
+				F55D208D22A59C1C0058AC79 /* Domain */,
 				8DC8B21822A1764400CA0435 /* ios-code-challenge-Bridging-Header.h */,
 				C5CEF1D1201534CD009D1571 /* Cells */,
 				C5CEF1C72014D73A009D1571 /* YelpAPI */,
@@ -214,6 +229,7 @@
 			children = (
 				C5CEF1B72014411C009D1571 /* NXTDataSource.h */,
 				C5CEF1B82014411C009D1571 /* NXTDataSource.m */,
+				F55D20A222A5AF030058AC79 /* YelpDataSource.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -239,16 +255,16 @@
 		C5CEF1C72014D73A009D1571 /* YelpAPI */ = {
 			isa = PBXGroup;
 			children = (
+				F55D209522A59F440058AC79 /* YLPBusiness.h */,
+				F55D209722A59F440058AC79 /* YLPBusiness.m */,
+				F55D209422A59F440058AC79 /* YLPSearch.h */,
+				F55D209622A59F440058AC79 /* YLPSearch.m */,
 				C5CEF1BE201446C1009D1571 /* AFYelpAPIClient.h */,
 				C5CEF1BF201446C1009D1571 /* AFYelpAPIClient.m */,
 				C5CEF1C52014D6DB009D1571 /* AFYelpAPIClient+Search.m */,
 				C5CEF1C42014D6DB009D1571 /* AFYelpAPIClient+Search.h */,
 				C5CEF1C82014DB71009D1571 /* YLPSearchQuery.h */,
 				C5CEF1C92014DB71009D1571 /* YLPSearchQuery.m */,
-				C5CEF1CB2014DC36009D1571 /* YLPSearch.h */,
-				C5CEF1CC2014DC36009D1571 /* YLPSearch.m */,
-				C5CEF1CE2014E1FD009D1571 /* YLPBusiness.h */,
-				C5CEF1CF2014E1FD009D1571 /* YLPBusiness.m */,
 				C5CEF1DA20153618009D1571 /* YLPBusiness+CellForObject.h */,
 				C5CEF1DB20153618009D1571 /* YLPBusiness+CellForObject.m */,
 			);
@@ -263,8 +279,37 @@
 				C5CEF1D42015350A009D1571 /* NXTBusinessTableViewCell.xib */,
 				C5CEF1D72015354C009D1571 /* NXTBusinessTableViewCell+YLPBusiness.h */,
 				C5CEF1D82015354C009D1571 /* NXTBusinessTableViewCell+YLPBusiness.m */,
+				F55D209E22A5AD780058AC79 /* BusinessCell.swift */,
+				F55D209F22A5AD780058AC79 /* BusinessCell.xib */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		F55D208D22A59C1C0058AC79 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				F55D209122A59D840058AC79 /* Services */,
+				F55D208E22A59C220058AC79 /* Core */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		F55D208E22A59C220058AC79 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				F55D208F22A59CA60058AC79 /* CCYelpBusiness.swift */,
+				F55D209222A59DD10058AC79 /* CCYelpPSearch.swift */,
+				F55D209C22A5A59C0058AC79 /* CCError.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		F55D209122A59D840058AC79 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				F55D209A22A5A12D0058AC79 /* YelpAPIClient.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -377,6 +422,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F55D20A122A5AD780058AC79 /* BusinessCell.xib in Resources */,
 				C5CEF1912013F25A009D1571 /* LaunchScreen.storyboard in Resources */,
 				C5CEF18E2013F25A009D1571 /* Assets.xcassets in Resources */,
 				C5CEF1D62015350A009D1571 /* NXTBusinessTableViewCell.xib in Resources */,
@@ -462,19 +508,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F55D209D22A5A59C0058AC79 /* CCError.swift in Sources */,
 				C5CEF1832013F25A009D1571 /* AppDelegate.m in Sources */,
+				F55D209B22A5A12D0058AC79 /* YelpAPIClient.swift in Sources */,
 				C5CEF1D92015354C009D1571 /* NXTBusinessTableViewCell+YLPBusiness.m in Sources */,
 				C5CEF1942013F25A009D1571 /* main.m in Sources */,
-				C5CEF1CD2014DC36009D1571 /* YLPSearch.m in Sources */,
 				C5CEF1B92014411C009D1571 /* NXTDataSource.m in Sources */,
 				8DC8B22C22A186E000CA0435 /* MasterViewController.swift in Sources */,
-				C5CEF1D02014E1FD009D1571 /* YLPBusiness.m in Sources */,
+				F55D209922A59F440058AC79 /* YLPBusiness.m in Sources */,
 				C5CEF1D52015350A009D1571 /* NXTBusinessTableViewCell.m in Sources */,
 				8DC8B21A22A1764500CA0435 /* DetailViewController.swift in Sources */,
+				F55D20A322A5AF030058AC79 /* YelpDataSource.swift in Sources */,
 				C5CEF1CA2014DB71009D1571 /* YLPSearchQuery.m in Sources */,
+				F55D20A022A5AD780058AC79 /* BusinessCell.swift in Sources */,
 				C5CEF1DC20153618009D1571 /* YLPBusiness+CellForObject.m in Sources */,
+				F55D209022A59CA60058AC79 /* CCYelpBusiness.swift in Sources */,
+				F55D209322A59DD10058AC79 /* CCYelpPSearch.swift in Sources */,
 				C5CEF1C0201446C1009D1571 /* AFYelpAPIClient.m in Sources */,
 				C5CEF1C62014D6DB009D1571 /* AFYelpAPIClient+Search.m in Sources */,
+				F55D209822A59F440058AC79 /* YLPSearch.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -640,7 +692,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8XCRURZB6Z;
+				DEVELOPMENT_TEAM = NYFE69T5LQ;
 				INFOPLIST_FILE = "ios-code-challenge/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -660,7 +712,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8XCRURZB6Z;
+				DEVELOPMENT_TEAM = NYFE69T5LQ;
 				INFOPLIST_FILE = "ios-code-challenge/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
