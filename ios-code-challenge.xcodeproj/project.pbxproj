@@ -37,6 +37,7 @@
 		F55D20A122A5AD780058AC79 /* BusinessCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F55D209F22A5AD780058AC79 /* BusinessCell.xib */; };
 		F55D20A322A5AF030058AC79 /* YelpDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55D20A222A5AF030058AC79 /* YelpDataSource.swift */; };
 		F58AA14B22A5C2D0000F8B04 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58AA14A22A5C2D0000F8B04 /* UIImageView+Extension.swift */; };
+		F58AA14D22A5CAE1000F8B04 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58AA14C22A5CAE1000F8B04 /* LocationService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +112,7 @@
 		F55D209F22A5AD780058AC79 /* BusinessCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BusinessCell.xib; sourceTree = "<group>"; };
 		F55D20A222A5AF030058AC79 /* YelpDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpDataSource.swift; sourceTree = "<group>"; };
 		F58AA14A22A5C2D0000F8B04 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
+		F58AA14C22A5CAE1000F8B04 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		FE926015E1B4191E0337FDF0 /* libPods-ios-code-challengeUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ios-code-challengeUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -311,6 +313,7 @@
 			isa = PBXGroup;
 			children = (
 				F55D209A22A5A12D0058AC79 /* YelpAPIClient.swift */,
+				F58AA14C22A5CAE1000F8B04 /* LocationService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -518,6 +521,7 @@
 				C5CEF1942013F25A009D1571 /* main.m in Sources */,
 				C5CEF1B92014411C009D1571 /* NXTDataSource.m in Sources */,
 				8DC8B22C22A186E000CA0435 /* MasterViewController.swift in Sources */,
+				F58AA14D22A5CAE1000F8B04 /* LocationService.swift in Sources */,
 				F55D209922A59F440058AC79 /* YLPBusiness.m in Sources */,
 				C5CEF1D52015350A009D1571 /* NXTBusinessTableViewCell.m in Sources */,
 				8DC8B21A22A1764500CA0435 /* DetailViewController.swift in Sources */,

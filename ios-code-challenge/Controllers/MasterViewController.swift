@@ -29,24 +29,36 @@ class MasterViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        
         registerCells()
         
         tableView.dataSource = dataSource
         tableView.delegate = dataSource
         
-        let query = YLPSearchQuery(location: "5550 West Executive Dr. Tampa, FL 33609")
-        AFYelpAPIClient.shared().search(with: query, completion: { [weak self] result in
+        LocationService.main.getCurrentLocationCompletion = { [weak self] result in
             guard let strongSelf = self else {return}
-            switch result{
-            case .success(let searchResults):
-                strongSelf.dataSource?.setObjects(businesses: searchResults.businesses)
-            case .failure(let error):
-                print(error)
+            switch result {
+            case .success(let location):
+                let queryDict = ["latitude": location.latitude, "longitude": location.longitude]
+                AFYelpAPIClient.shared()?.search(location: queryDict, completion: { result in
+                    strongSelf.process(result: result)
+                })
+            case .failure:
+                let query = YLPSearchQuery(location: "5550 West Executive Dr. Tampa, FL 33609")
+                AFYelpAPIClient.shared().search(with: query, completion: {  result in
+                    strongSelf.process(result: result)
+                })
             }
-        })
+        }
+        LocationService.main.getCurrentLocation()
+    }
+    
+    private func process(result: Result<CCYelpPSearch,CCError>){
+        switch result{
+        case .success(let searchResults):
+            dataSource?.setObjects(businesses: searchResults.businesses)
+        case .failure(let error):
+            print(error)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {

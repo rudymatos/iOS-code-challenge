@@ -13,5 +13,6 @@ struct CCError: Error{
     var type: ErrorType
     enum ErrorType{
         case errorGettingBusinesses
+        case errorGettingLocationData
     }
 }
