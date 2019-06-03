@@ -11,9 +11,11 @@ import UIKit
 
 
 class YelpDataSource: NSObject, UITableViewDelegate, UITableViewDataSource{
+    
     var businesses : [CCYelpBusiness]
     
     var setObjectsCompletion: (() -> Void)?
+    var showBusinessInfoCompletion : ((CCYelpBusiness) -> Void)?
     
     init(businesses: [CCYelpBusiness]){
         self.businesses = businesses
@@ -48,6 +50,8 @@ class YelpDataSource: NSObject, UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("working with \(businesses[indexPath.row])")
+        let selectedBusiness = businesses[indexPath.row]
+        showBusinessInfoCompletion?(selectedBusiness)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     

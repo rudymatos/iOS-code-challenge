@@ -11,20 +11,29 @@ import UIKit
 class MasterViewController: UITableViewController {
     
     var detailViewController: DetailViewController?
-    
+
     lazy private var dataSource : YelpDataSource? = {
        let dataSource = YelpDataSource(businesses: [])
         dataSource.setObjectsCompletion = { [weak self] in
             guard let strongSelf = self else {return}
             strongSelf.tableView.reloadData()
         }
+        
+        dataSource.showBusinessInfoCompletion = { [weak self] selectedBusiness in
+            guard let strongSelf = self else {return}
+            strongSelf.performSegue(withIdentifier: "showDetail", sender: nil)
+        }
+        
         return dataSource
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        
         registerCells()
+        
         tableView.dataSource = dataSource
         tableView.delegate = dataSource
         
@@ -52,14 +61,16 @@ class MasterViewController: UITableViewController {
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail" {
-//            guard let indexPath = tableView.indexPathForSelectedRow,
-//                let controller = segue.destination as? DetailViewController else {
-//                return
-//            }
-//            let object = objects[indexPath.row]
-//            controller.setDetailItem(newDetailItem: object)
-//            controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem
-//            controller.navigationItem.leftItemsSupplementBackButton = true
+            guard let indexPath = tableView.indexPathForSelectedRow,
+                let controller = (segue.destination as? UINavigationController)?.viewControllers.first as? DetailViewController else {
+                return
+            }
+            guard let business = self.dataSource?.businesses[indexPath.row] else{
+                return
+            }
+            controller.set(business: business)
+            controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem
+            controller.navigationItem.leftItemsSupplementBackButton = true
         }
     }
 

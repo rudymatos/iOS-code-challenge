@@ -35,21 +35,7 @@ class BusinessCell: UITableViewCell {
         distanceLBL.text = "\(business.distance)"
         categoriesLBL.text = business.categories.compactMap({$0.title}).joined(separator: ",")
         if let imageURL = business.imageThumbnail{
-            loadImage(withURL: imageURL)
-        }
-    }
-    
-    private func loadImage(withURL: URL){
-        print("working with url :\(withURL)")
-        DispatchQueue.global().async { [weak self] in
-            guard let strongSelf = self else {return}
-            if let data = try? Data(contentsOf: withURL){
-                if let image = UIImage(data: data){
-                    DispatchQueue.main.async {
-                        strongSelf.businessIV.image = image
-                    }
-                }
-            }
+            businessIV.loadImage(withURL: imageURL)
         }
     }
     

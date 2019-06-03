@@ -8,12 +8,14 @@
 
 import Foundation
 
-struct CCYelpBusiness{
+class CCYelpBusiness: NSObject{
+    
     var name: String
     var identifier: String
     var categories: [CCYelpCategory]
     var rating: Int
     var reviewCount: Int
+    var price: String
     var distance: Double
     var imageThumbnail : URL?
     var location: CCYelpLocation?
@@ -44,11 +46,9 @@ struct CCYelpBusiness{
         if let imageThumbnailURL = data["image_url"] as? String{
                 self.imageThumbnail = URL(string: imageThumbnailURL)
         }
-        self.distance = 0
-        if let distanceString = data["distance"] as? String{
-            self.distance = Double(distanceString) ?? 0
-        }
-        if let coordinates = data["coordinates"] as? [String: String], let latitudeString = coordinates["latitude"], let longitudeString = coordinates["longitude"], let latitude = Double(latitudeString), let longitude = Double(longitudeString){
+        self.distance = data["distance"] as? Double ?? 0
+        self.price = data["price"] as? String ?? ""
+        if let coordinates = data["coordinates"] as? [String: Double], let latitude = coordinates["latitude"], let longitude = coordinates["longitude"]{
             self.location = CCYelpLocation(latitude: latitude, longitude: longitude)
         }
     }

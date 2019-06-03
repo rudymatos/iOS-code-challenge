@@ -10,10 +10,17 @@ import UIKit
 
 class DetailViewController: UIViewController {
 
-    @IBOutlet weak var detailDescriptionLabel: UILabel!
+    @IBOutlet weak var businessIV: UIImageView!
+    @IBOutlet weak var nameLBL: UILabel!
+    @IBOutlet weak var categoriesLBL: UILabel!
+    @IBOutlet weak var reviewCountLBL: UILabel!
+    @IBOutlet weak var distanceLBL: UILabel!
+    @IBOutlet weak var priceLBL: UILabel!
+    @IBOutlet weak var ratingLBL: UILabel!
+    
     lazy private var favoriteBarButtonItem: UIBarButtonItem = UIBarButtonItem(image: UIImage(named: "Star-Outline"), style: .plain, target: self, action: #selector(onFavoriteBarButtonSelected(_:)))
 
-    @objc var detailItem: NSDate?
+    @objc var business: CCYelpBusiness?
     
     private var _favorite: Bool = false
     private var isFavorite: Bool {
@@ -24,20 +31,25 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         configureView()
         navigationItem.rightBarButtonItems = [favoriteBarButtonItem]
     }
     
     private func configureView() {
-        guard let detailItem = detailItem else { return }
-        detailDescriptionLabel.text = detailItem.description
+        guard let business = business else { return }
+        if let imageURL =  business.imageThumbnail{
+            businessIV.loadImage(withURL: imageURL)
+        }
+        nameLBL.text = business.name
+        ratingLBL.text = "\(business.rating)"
+        reviewCountLBL.text = "\(business.reviewCount)"
+        distanceLBL.text = "\(business.distance)"
+        priceLBL.text = business.price
+        categoriesLBL.text = business.categories.compactMap({$0.title}).joined(separator: ",")
     }
     
-    func setDetailItem(newDetailItem: NSDate) {
-        guard detailItem != newDetailItem else { return }
-        detailItem = newDetailItem
-        configureView()
+    func set(business: CCYelpBusiness) {
+        self.business = business
     }
     
     private func updateFavoriteBarButtonState() {
