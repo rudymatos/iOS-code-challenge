@@ -25,7 +25,7 @@ extension AFYelpAPIClient{
         }
     }
     
-    func search(location: [String:Double], completion: @escaping ((Result<CCYelpPSearch,CCError>) -> Void)){
+    func search(location: [String:Any], completion: @escaping ((Result<CCYelpPSearch,CCError>) -> Void)){
         get("businesses/search", parameters: location, progress: nil, success: { (task, responseObject) in
             self.processResult(task: task, responseObject: responseObject, completion: completion)
         }) { (task, responseObject) in
