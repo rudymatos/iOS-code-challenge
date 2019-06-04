@@ -11,6 +11,7 @@ import MapKit
 
 class DetailViewController: UIViewController {
 
+    @IBOutlet weak var visualEffect: UIVisualEffectView!
     @IBOutlet weak var businessIV: UIImageView!
     @IBOutlet weak var nameLBL: UILabel!
     @IBOutlet weak var categoriesLBL: UILabel!
@@ -43,6 +44,7 @@ class DetailViewController: UIViewController {
         categoriesLBL.text = business.categories.compactMap({$0.title}).joined(separator: ",")
         _favorite = FavoriteService.main.isBusinessFavorite(withId: business.identifier)
         updateFavoriteBarButtonState()
+        visualEffect.isHidden = true
     }
     
     func set(business: CCYelpBusiness) {

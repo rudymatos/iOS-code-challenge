@@ -167,14 +167,40 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mpb-n1-8vO">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="jwb-QO-6Rx">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start by selecting an item" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yDk-Nw-lzD">
+                                            <rect key="frame" x="57" y="295" width="261.5" height="28.5"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="24"/>
+                                            <color key="textColor" red="0.68033856150000005" green="0.69907194380000004" blue="0.70959001779999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="yDk-Nw-lzD" firstAttribute="centerY" secondItem="jwb-QO-6Rx" secondAttribute="centerY" id="RJu-4G-8pf"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="yDk-Nw-lzD" secondAttribute="trailing" constant="8" id="m9R-M0-dIq"/>
+                                        <constraint firstItem="yDk-Nw-lzD" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="jwb-QO-6Rx" secondAttribute="leading" constant="8" id="ySz-gv-v3E"/>
+                                        <constraint firstItem="yDk-Nw-lzD" firstAttribute="centerX" secondItem="jwb-QO-6Rx" secondAttribute="centerX" id="zZU-uZ-nVX"/>
+                                    </constraints>
+                                </view>
+                                <blurEffect style="light"/>
+                            </visualEffectView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="hpX-yA-oZ0" firstAttribute="centerX" secondItem="svH-Pt-448" secondAttribute="centerX" id="5pM-On-ha5"/>
+                            <constraint firstItem="Mpb-n1-8vO" firstAttribute="top" secondItem="svH-Pt-448" secondAttribute="top" id="G3x-lH-3qP"/>
                             <constraint firstItem="hpX-yA-oZ0" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leading" constant="16" id="KC0-Bg-d0O"/>
+                            <constraint firstItem="Mpb-n1-8vO" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leading" id="ObM-El-lqI"/>
                             <constraint firstAttribute="trailing" secondItem="hpX-yA-oZ0" secondAttribute="trailing" constant="16" id="TxJ-x1-P9C"/>
                             <constraint firstItem="hpX-yA-oZ0" firstAttribute="centerY" secondItem="svH-Pt-448" secondAttribute="centerY" id="bHm-oe-Bdw"/>
                             <constraint firstItem="3ef-oa-N0N" firstAttribute="width" secondItem="svH-Pt-448" secondAttribute="width" multiplier="0.8" id="dYH-VP-KVL"/>
+                            <constraint firstItem="VUw-jc-0yf" firstAttribute="trailing" secondItem="Mpb-n1-8vO" secondAttribute="trailing" id="gGk-hp-Jzf"/>
+                            <constraint firstItem="VUw-jc-0yf" firstAttribute="bottom" secondItem="Mpb-n1-8vO" secondAttribute="bottom" id="uHh-Qd-15R"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="VUw-jc-0yf"/>
                     </view>
@@ -186,6 +212,7 @@
                         <outlet property="nameLBL" destination="KuU-rF-QYv" id="kek-aB-Twi"/>
                         <outlet property="priceLBL" destination="1Q0-ag-MfU" id="kJ6-Og-0y3"/>
                         <outlet property="ratingLBL" destination="Kwr-Qg-Hl0" id="PTz-Uj-ZDQ"/>
+                        <outlet property="visualEffect" destination="Mpb-n1-8vO" id="ePL-P0-B7e"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FJe-Yq-33r" sceneMemberID="firstResponder"/>
