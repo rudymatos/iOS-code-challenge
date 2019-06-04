@@ -10,9 +10,7 @@ import UIKit
 
 class MasterViewController: UITableViewController {
     
-    var detailViewController: DetailViewController?
-    private let searchController = UISearchController(searchResultsController: nil)
-    
+    private var searchController : UISearchController!
     private var viewModel = MainViewModel()
     
     override func viewDidLoad() {
@@ -25,9 +23,8 @@ class MasterViewController: UITableViewController {
         addSearchController()
         configureViewModelCompletion()
         viewModel.getUserLocation { [weak self] in
-            guard let strongSelf = self else {return}
-            strongSelf.tableView.dataSource = strongSelf.viewModel.dataSource
-            strongSelf.tableView.delegate = strongSelf.viewModel.dataSource
+            self?.tableView.dataSource = self?.viewModel.dataSource
+            self?.tableView.delegate = self?.viewModel.dataSource
         }
     }
     
@@ -84,6 +81,7 @@ class MasterViewController: UITableViewController {
     }
     
     private func addSearchController(){
+        searchController = UISearchController(searchResultsController: nil)
         self.definesPresentationContext = true
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false

@@ -44,14 +44,12 @@ extension LocationService{
 extension LocationService: CLLocationManagerDelegate{
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("location error: \(error)")
         let error = CCError(message: "Error getting Location Services. \(error.localizedDescription)).", type: .errorGettingLocationData)
         getCurrentLocationCompletion?(.failure(error))
         
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print("in here")
         self.locationManager?.stopUpdatingLocation()
         self.locationManager?.delegate = nil
         guard let coordinates = locations.first?.coordinate else {

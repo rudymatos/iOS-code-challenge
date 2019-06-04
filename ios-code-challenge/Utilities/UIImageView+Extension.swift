@@ -8,9 +8,7 @@
 
 import Foundation
 
-
-private let imageCache = NSCache<NSString, UIImage>()
-
+private let imageCache = NSCache<NSString, NSData>()
 
 extension UIImageView{
     
@@ -22,11 +20,10 @@ extension UIImageView{
             return
         }
         
-        
         if let imageFromCache = imageCache.object(forKey: url.absoluteString as NSString){
-            print("getting image from cache")
             DispatchQueue.main.async {
-                self.image = imageFromCache
+                let image = UIImage(data: imageFromCache as! Data)
+                self.image = image
             }
             return
         }
@@ -35,8 +32,7 @@ extension UIImageView{
             guard let strongSelf = self else {return}
             if let data = try? Data(contentsOf: url){
                 if let image = UIImage(data: data){
-                    print("making request")
-                    imageCache.setObject(image, forKey: url.absoluteString as NSString)
+                    imageCache.setObject(data as! NSData, forKey: url.absoluteString as NSString)
                     DispatchQueue.main.async {
                         strongSelf.image = image
                     }
