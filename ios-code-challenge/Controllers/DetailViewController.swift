@@ -46,6 +46,8 @@ class DetailViewController: UIViewController {
         distanceLBL.text = "\(business.distance)"
         priceLBL.text = business.price
         categoriesLBL.text = business.categories.compactMap({$0.title}).joined(separator: ",")
+        _favorite = FavoriteService.main.isBusinessFavorite(withId: business.identifier)
+        updateFavoriteBarButtonState()
     }
     
     func set(business: CCYelpBusiness) {
@@ -57,7 +59,16 @@ class DetailViewController: UIViewController {
     }
     
     @objc private func onFavoriteBarButtonSelected(_ sender: Any) {
+        guard let business = business else {
+            return
+        }
         _favorite.toggle()
+        if isFavorite{
+            FavoriteService.main.addToFavorite(business: business)
+        }else{
+            FavoriteService.main.removeFromFavorites(business: business)
+        }
+        NotificationCenter.default.post(name: Notification.Name("favoriteModified"), object: nil, userInfo: nil)
         updateFavoriteBarButtonState()
     }
 }

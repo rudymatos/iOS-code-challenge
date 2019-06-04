@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct CCYelpPSearch{
+struct CCYelpSearch{
     var businesses : [CCYelpBusiness]
     var total: Int
     

@@ -9,23 +9,7 @@
 import Foundation
 
 extension AFYelpAPIClient{
-    func search(with query: YLPSearchQuery, completion: @escaping ((Result<CCYelpPSearch,CCError>) -> Void)){
-        get("businesses/search", parameters: query.parameters(), progress: nil, success: { (task, responseObject) in
-            guard let data = responseObject as? [String:Any] else{
-                let error = CCError(message: "Invalid Results", type: .errorGettingBusinesses)
-                completion(.failure(error))
-                return
-            }
-            let yelpSearch = CCYelpPSearch(data: data)
-            
-            completion(.success(yelpSearch))
-        }) { (task, responseObject) in
-            let error = CCError(message: "Invalid Results", type: .errorGettingBusinesses)
-            completion(.failure(error))
-        }
-    }
-    
-    func search(location: [String:Any], completion: @escaping ((Result<CCYelpPSearch,CCError>) -> Void)){
+    func search(location: [String:Any], completion: @escaping ((Result<CCYelpSearch,CCError>) -> Void)){
         get("businesses/search", parameters: location, progress: nil, success: { (task, responseObject) in
             self.processResult(task: task, responseObject: responseObject, completion: completion)
         }) { (task, responseObject) in
@@ -34,13 +18,13 @@ extension AFYelpAPIClient{
         }
     }
     
-    private func processResult(task: URLSessionDataTask, responseObject: Any?, completion: @escaping ((Result<CCYelpPSearch,CCError>) -> Void)){
+    private func processResult(task: URLSessionDataTask, responseObject: Any?, completion: @escaping ((Result<CCYelpSearch,CCError>) -> Void)){
         guard let data = responseObject as? [String:Any] else{
             let error = CCError(message: "Invalid Results", type: .errorGettingBusinesses)
             completion(.failure(error))
             return
         }
-        let yelpSearch = CCYelpPSearch(data: data)
+        let yelpSearch = CCYelpSearch(data: data)
         completion(.success(yelpSearch))
     }
 }

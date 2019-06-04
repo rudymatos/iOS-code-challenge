@@ -74,7 +74,7 @@ class MasterViewController: UITableViewController {
         searchController.searchBar.delegate = self
     }
     
-    private func process(result: Result<CCYelpPSearch,CCError>){
+    private func process(result: Result<CCYelpSearch,CCError>){
         switch result{
         case .success(let searchResults):
             print("total: \(searchResults.total)")

@@ -13,7 +13,7 @@ class CCYelpBusiness: NSObject{
     var name: String
     var identifier: String
     var categories: [CCYelpCategory]
-    var rating: Int
+    var rating: Double
     var reviewCount: Int
     var price: String
     var distance: Double
@@ -23,6 +23,12 @@ class CCYelpBusiness: NSObject{
     struct CCYelpLocation{
         var latitude: Double
         var longitude: Double
+        
+        func getObjectDict() -> [String:Any?]{
+            return [
+                "coordinates": ["latitude" : latitude, "longitude": longitude]
+            ]
+        }
     }
     
     struct CCYelpCategory{
@@ -32,16 +38,23 @@ class CCYelpBusiness: NSObject{
             self.alias = data["alias"] as? String ?? ""
             self.title = data["title"] as? String ?? ""
         }
+        
+        func getObjectDic() -> [String:Any?]{
+            return [
+                "alias":alias,
+                "title":title
+            ]
+        }
     }
     
-    init(data: [String:Any]){
+    init(data: [String:Any?]){
         self.name = data["name"] as? String ?? ""
         self.identifier = data["id"] as? String ?? ""
         self.categories = []
         if let categories = data["categories"] as? [[String:Any]] {
             self.categories = categories.compactMap({CCYelpCategory.init(data: $0)})
         }
-        self.rating = data["rating"] as? Int ?? 0
+        self.rating = data["rating"] as? Double ?? 0
         self.reviewCount = data["review_count"] as? Int  ?? 0
         if let imageThumbnailURL = data["image_url"] as? String{
                 self.imageThumbnail = URL(string: imageThumbnailURL)
@@ -52,4 +65,20 @@ class CCYelpBusiness: NSObject{
             self.location = CCYelpLocation(latitude: latitude, longitude: longitude)
         }
     }
+    
+    
+    func getObjectDic() -> [String:Any?]{
+        return [
+            "name":name,
+            "id":identifier,
+            "categories":categories.compactMap({$0.getObjectDic()}),
+            "rating":rating,
+            "review_count":reviewCount,
+            "image_url": imageThumbnail?.absoluteString,
+            "distance":distance,
+            "price":price,
+            "coordinates": location?.getObjectDict()
+        ]
+    }
+    
 }
