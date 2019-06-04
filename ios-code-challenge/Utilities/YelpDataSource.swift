@@ -9,27 +9,30 @@
 import Foundation
 import UIKit
 
-
 class YelpDataSource: NSObject, UITableViewDelegate, UITableViewDataSource{
     
-    let itemPerBatch = 10
+    let itemPerBatch = 50
     var currentCount = 0
     var totalCount = 0
     
     var businesses : [CCYelpBusiness]
     
     var loadNextBatch: ((Int,Int) -> Void)?
-    var setObjectsCompletion: (() -> Void)?
     var showBusinessInfoCompletion : ((CCYelpBusiness) -> Void)?
     
     init(businesses: [CCYelpBusiness]){
         self.businesses = businesses
     }
     
-    func setObjects(businesses: [CCYelpBusiness], withTotalCount: Int){
-        self.businesses.append(contentsOf:  businesses)
-        self.totalCount = withTotalCount
-        setObjectsCompletion?()
+    func set(yelpSearchResult: CCYelpSearch){
+        self.businesses = yelpSearchResult.businesses
+        self.totalCount = yelpSearchResult.total
+        self.currentCount = itemPerBatch
+    }
+    
+    func append(yelpSearchResult:CCYelpSearch){
+        self.businesses.append(contentsOf:  yelpSearchResult.businesses)
+        self.totalCount = yelpSearchResult.total
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

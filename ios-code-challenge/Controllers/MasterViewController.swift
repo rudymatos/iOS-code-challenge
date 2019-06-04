@@ -7,61 +7,80 @@
 //
 
 import UIKit
-import CoreLocation
 
 class MasterViewController: UITableViewController {
     
     var detailViewController: DetailViewController?
-    
     private let searchController = UISearchController(searchResultsController: nil)
-    private var location: (latitude:CLLocationDegrees, longitude:CLLocationDegrees)?
     
-    lazy private var dataSource : YelpDataSource? = {
-       let dataSource = YelpDataSource(businesses: [])
-        
-        dataSource.setObjectsCompletion = { [weak self] in
-            guard let strongSelf = self else {return}
-            strongSelf.tableView.reloadData()
-        }
-        
-        dataSource.showBusinessInfoCompletion = { [weak self] selectedBusiness in
-            guard let strongSelf = self else {return}
-            strongSelf.performSegue(withIdentifier: "showDetail", sender: nil)
-        }
-        
-        dataSource.loadNextBatch = { [weak self] currentCount, limit in
-            guard let strongSelf = self else {return}
-            var queryDict : [String:Any] = ["limit": limit, "offset": currentCount, "sort_by" : "distance", "term":""]
-            if let location = strongSelf.location{
-                queryDict["latitude"] = location.latitude
-                queryDict["longitude"] = location.longitude
-            }else{
-                queryDict["location"] = "5550 West Executive Dr. Tampa, FL 33609"
-            }
-            AFYelpAPIClient.shared()?.search(location: queryDict, completion: { result in
-                strongSelf.process(result: result)
-            })
-        }
-        
-        return dataSource
-    }()
+    private var viewModel = MainViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureView()
+    }
+    
+    private func configureView(){
         registerCells()
         addSearchController()
-        LocationService.main.getCurrentLocationCompletion = { [weak self] result in
+        configureViewModelCompletion()
+        viewModel.getUserLocation { [weak self] in
             guard let strongSelf = self else {return}
-            switch result {
-            case .success(let location):
-                strongSelf.location = location
-            case .failure:
-                print("location not available")
-            }
-            strongSelf.tableView.dataSource = strongSelf.dataSource
-            strongSelf.tableView.delegate = strongSelf.dataSource
+            strongSelf.tableView.dataSource = strongSelf.viewModel.dataSource
+            strongSelf.tableView.delegate = strongSelf.viewModel.dataSource
         }
-        LocationService.main.getCurrentLocation()
+    }
+    
+    @IBAction func sortBy(_ sender: UIBarButtonItem) {
+        let sortByList = viewModel.getSortBy()
+        let completion : ((String) -> Void) = { [weak self] element in
+            guard let strongSelf = self else {return}
+            strongSelf.viewModel.set(sortByValue: element)
+        }
+        let view : UIView? = navigationItem.leftBarButtonItem?.value(forKey: "view") as? UIView
+        generateAlertVC(withTitle: "Sort By", message: "Select an Item", elements: sortByList, completion: completion, displayOnView: view)
+    }
+    
+    @IBAction func showCategories(_ sender: UIBarButtonItem) {
+        let categories = viewModel.getCategories()
+        let completion : ((String) -> Void) = { [weak self] element in
+            guard let strongSelf = self else {return}
+            strongSelf.viewModel.filterResults(byValue: element)
+        }
+        let view : UIView? = navigationItem.rightBarButtonItem?.value(forKey: "view") as? UIView
+        generateAlertVC(withTitle: "Categories", message: "Select a Category", elements: categories, completion: completion, displayOnView: view)
+    }
+    
+    private func generateAlertVC(withTitle title: String, message: String, elements: [String], completion : @escaping ((String) -> Void), displayOnView: UIView?){
+        let alertVC = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
+        for element in elements{
+            let action = UIAlertAction(title: element, style: .default) { _ in
+                completion(element)
+            }
+            alertVC.addAction(action)
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertVC.addAction(cancelAction)
+        
+        if let popOverController = alertVC.popoverPresentationController, let displayOnView = displayOnView{
+            popOverController.sourceRect = displayOnView.frame
+            popOverController.sourceView = displayOnView
+        }
+        
+        present(alertVC, animated: true, completion: nil)
+    }
+    
+    private func configureViewModelCompletion(){
+        viewModel.loadDataCompletion = { [weak self] in
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
+            }
+        }
+        
+        viewModel.showBusinessInfoCompletion = { [weak self] _ in
+            guard let strongSelf = self else {return}
+            strongSelf.performSegue(withIdentifier: "showDetail", sender: nil)
+        }
     }
     
     private func addSearchController(){
@@ -70,18 +89,7 @@ class MasterViewController: UITableViewController {
         navigationItem.hidesSearchBarWhenScrolling = false
         searchController.dimsBackgroundDuringPresentation = false
         searchController.hidesNavigationBarDuringPresentation = false
-//        searchController.searchBar.tintColor = UIColor(named: SpeedParkConstants.Color.main)
         searchController.searchBar.delegate = self
-    }
-    
-    private func process(result: Result<CCYelpSearch,CCError>){
-        switch result{
-        case .success(let searchResults):
-            print("total: \(searchResults.total)")
-            dataSource?.setObjects(businesses: searchResults.businesses, withTotalCount: searchResults.total)
-        case .failure(let error):
-            print(error)
-        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -101,9 +109,7 @@ class MasterViewController: UITableViewController {
                 let controller = (segue.destination as? UINavigationController)?.viewControllers.first as? DetailViewController else {
                 return
             }
-            guard let business = self.dataSource?.businesses[indexPath.row] else{
-                return
-            }
+            let business = viewModel.getBusiness(byRow: indexPath.row)
             controller.set(business: business)
             controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem
             controller.navigationItem.leftItemsSupplementBackButton = true
@@ -111,10 +117,13 @@ class MasterViewController: UITableViewController {
     }
 }
 
-
 extension MasterViewController: UISearchBarDelegate{
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        filterBy(value: searchText)
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let text = searchBar.text else{
+            return
+        }
+        filterBy(value: text)
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
@@ -122,17 +131,6 @@ extension MasterViewController: UISearchBarDelegate{
     }
     
     private func filterBy(value: String){
-        print("filtering by \(value)")
-        var queryDict : [String: Any] = [:]
-        if let location = location{
-            queryDict = ["latitude": location.latitude, "longitude": location.longitude, "term" : value]
-        }else{
-            queryDict = ["term": "5550 West Executive Dr. Tampa, FL 33609", "term" : value]
-        }
-        AFYelpAPIClient.shared()?.search(location: queryDict, completion: {[weak self] result in
-            guard let strongSelf = self else {return}
-            strongSelf.process(result: result)
-        })
+        viewModel.filterResults(byValue: value)
     }
-    
 }

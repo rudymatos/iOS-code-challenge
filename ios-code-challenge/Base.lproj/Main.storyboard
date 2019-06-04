@@ -190,7 +190,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FJe-Yq-33r" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="709" y="129"/>
+            <point key="canvasLocation" x="708" y="128.18590704647679"/>
         </scene>
         <!--Split View Controller-->
         <scene sceneID="Nki-YV-4Qg">
@@ -331,7 +331,20 @@
                         </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" systemItem="search" id="fCn-PM-VSm"/>
-                    <navigationItem key="navigationItem" title="Search" id="Zdf-7t-Un8"/>
+                    <navigationItem key="navigationItem" title="Search" id="Zdf-7t-Un8">
+                        <barButtonItem key="leftBarButtonItem" image="sort_action" id="fQW-jE-Tvp">
+                            <color key="tintColor" red="0.0039215686274509803" green="0.65490196078431373" blue="0.70980392156862748" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="sortBy:" destination="7bK-jq-Zjz" id="sOR-v5-kJV"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="filter_action" id="ZNq-f2-k6O">
+                            <color key="tintColor" red="0.0039215686269999999" green="0.65490196079999996" blue="0.70980392160000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="showCategories:" destination="7bK-jq-Zjz" id="crY-cq-NER"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rux-fX-hf1" sceneMemberID="firstResponder"/>
             </objects>
@@ -356,8 +369,10 @@
     </scenes>
     <resources>
         <image name="default_img" width="80" height="80"/>
+        <image name="filter_action" width="20" height="20"/>
+        <image name="sort_action" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="YCP-d8-bSd"/>
+        <segue reference="6S0-TO-JiA"/>
     </inferredMetricsTieBreakers>
 </document>

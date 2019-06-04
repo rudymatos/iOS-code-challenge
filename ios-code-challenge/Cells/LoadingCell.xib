@@ -19,7 +19,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="84.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="041-Ur-gK7">
+                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="041-Ur-gK7">
                         <rect key="frame" x="141.5" y="24" width="37" height="37"/>
                         <color key="color" red="0.40383678670000001" green="0.35805416109999999" blue="0.5380117297" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </activityIndicatorView>

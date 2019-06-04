@@ -32,6 +32,8 @@
 		F505EB9322A5FC50009D2BBB /* FavoriteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F505EB9222A5FC50009D2BBB /* FavoriteService.swift */; };
 		F505EB9522A5FE29009D2BBB /* FavoritesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F505EB9422A5FE29009D2BBB /* FavoritesVC.swift */; };
 		F505EB9722A60804009D2BBB /* CCYelpBusiness.swift in Sources */ = {isa = PBXBuildFile; fileRef = F505EB9622A60804009D2BBB /* CCYelpBusiness.swift */; };
+		F505EB9A22A67BC5009D2BBB /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F505EB9922A67BC5009D2BBB /* MainViewModel.swift */; };
+		F505EB9C22A686B4009D2BBB /* QueryParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = F505EB9B22A686B4009D2BBB /* QueryParam.swift */; };
 		F55D209322A59DD10058AC79 /* CCYelpSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55D209222A59DD10058AC79 /* CCYelpSearch.swift */; };
 		F55D209822A59F440058AC79 /* YLPSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D209622A59F440058AC79 /* YLPSearch.m */; };
 		F55D209922A59F440058AC79 /* YLPBusiness.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D209722A59F440058AC79 /* YLPBusiness.m */; };
@@ -109,6 +111,8 @@
 		F505EB9222A5FC50009D2BBB /* FavoriteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteService.swift; sourceTree = "<group>"; };
 		F505EB9422A5FE29009D2BBB /* FavoritesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesVC.swift; sourceTree = "<group>"; };
 		F505EB9622A60804009D2BBB /* CCYelpBusiness.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CCYelpBusiness.swift; sourceTree = "<group>"; };
+		F505EB9922A67BC5009D2BBB /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		F505EB9B22A686B4009D2BBB /* QueryParam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryParam.swift; sourceTree = "<group>"; };
 		F55D209222A59DD10058AC79 /* CCYelpSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCYelpSearch.swift; sourceTree = "<group>"; };
 		F55D209422A59F440058AC79 /* YLPSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLPSearch.h; sourceTree = "<group>"; };
 		F55D209522A59F440058AC79 /* YLPBusiness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLPBusiness.h; sourceTree = "<group>"; };
@@ -205,6 +209,7 @@
 				C5CEF1D1201534CD009D1571 /* Cells */,
 				C5CEF1C72014D73A009D1571 /* YelpAPI */,
 				C5CEF1BD20144327009D1571 /* Controllers */,
+				F505EB9822A67B78009D2BBB /* ViewModels */,
 				C5CEF1BA20144217009D1571 /* Protocols */,
 				C5CEF1B6201440A5009D1571 /* Utilities */,
 				C5CEF1812013F25A009D1571 /* AppDelegate.h */,
@@ -301,6 +306,14 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		F505EB9822A67B78009D2BBB /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				F505EB9922A67BC5009D2BBB /* MainViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		F55D208D22A59C1C0058AC79 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
@@ -316,6 +329,7 @@
 				F505EB9622A60804009D2BBB /* CCYelpBusiness.swift */,
 				F55D209222A59DD10058AC79 /* CCYelpSearch.swift */,
 				F55D209C22A5A59C0058AC79 /* CCError.swift */,
+				F505EB9B22A686B4009D2BBB /* QueryParam.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -532,6 +546,7 @@
 				C5CEF1832013F25A009D1571 /* AppDelegate.m in Sources */,
 				F55D209B22A5A12D0058AC79 /* YelpAPIClient.swift in Sources */,
 				C5CEF1D92015354C009D1571 /* NXTBusinessTableViewCell+YLPBusiness.m in Sources */,
+				F505EB9A22A67BC5009D2BBB /* MainViewModel.swift in Sources */,
 				C5CEF1942013F25A009D1571 /* main.m in Sources */,
 				C5CEF1B92014411C009D1571 /* NXTDataSource.m in Sources */,
 				8DC8B22C22A186E000CA0435 /* MasterViewController.swift in Sources */,
@@ -546,6 +561,7 @@
 				F505EB9022A5F089009D2BBB /* LoadingCell.swift in Sources */,
 				F55D20A022A5AD780058AC79 /* BusinessCell.swift in Sources */,
 				C5CEF1DC20153618009D1571 /* YLPBusiness+CellForObject.m in Sources */,
+				F505EB9C22A686B4009D2BBB /* QueryParam.swift in Sources */,
 				F505EB9722A60804009D2BBB /* CCYelpBusiness.swift in Sources */,
 				F55D209322A59DD10058AC79 /* CCYelpSearch.swift in Sources */,
 				C5CEF1C0201446C1009D1571 /* AFYelpAPIClient.m in Sources */,

@@ -9,8 +9,8 @@
 import Foundation
 
 extension AFYelpAPIClient{
-    func search(location: [String:Any], completion: @escaping ((Result<CCYelpSearch,CCError>) -> Void)){
-        get("businesses/search", parameters: location, progress: nil, success: { (task, responseObject) in
+    func search(withParams params: [String:Any], completion: @escaping ((Result<CCYelpSearch,CCError>) -> Void)){
+        get("businesses/search", parameters: params, progress: nil, success: { (task, responseObject) in
             self.processResult(task: task, responseObject: responseObject, completion: completion)
         }) { (task, responseObject) in
             let error = CCError(message: "Invalid Results", type: .errorGettingBusinesses)
