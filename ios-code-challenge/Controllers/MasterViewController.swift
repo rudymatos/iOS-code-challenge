@@ -18,6 +18,7 @@ class MasterViewController: UITableViewController {
     
     lazy private var dataSource : YelpDataSource? = {
        let dataSource = YelpDataSource(businesses: [])
+        
         dataSource.setObjectsCompletion = { [weak self] in
             guard let strongSelf = self else {return}
             strongSelf.tableView.reloadData()
@@ -27,6 +28,21 @@ class MasterViewController: UITableViewController {
             guard let strongSelf = self else {return}
             strongSelf.performSegue(withIdentifier: "showDetail", sender: nil)
         }
+        
+        dataSource.loadNextBatch = { [weak self] currentCount, limit in
+            guard let strongSelf = self else {return}
+            var queryDict : [String:Any] = ["limit": limit, "offset": currentCount, "sort_by" : "distance", "term":""]
+            if let location = strongSelf.location{
+                queryDict["latitude"] = location.latitude
+                queryDict["longitude"] = location.longitude
+            }else{
+                queryDict["location"] = "5550 West Executive Dr. Tampa, FL 33609"
+            }
+            AFYelpAPIClient.shared()?.search(location: queryDict, completion: { result in
+                strongSelf.process(result: result)
+            })
+        }
+        
         return dataSource
     }()
     
@@ -34,25 +50,16 @@ class MasterViewController: UITableViewController {
         super.viewDidLoad()
         registerCells()
         addSearchController()
-        
-        tableView.dataSource = dataSource
-        tableView.delegate = dataSource
-        
         LocationService.main.getCurrentLocationCompletion = { [weak self] result in
             guard let strongSelf = self else {return}
             switch result {
             case .success(let location):
                 strongSelf.location = location
-                let queryDict = ["latitude": location.latitude, "longitude": location.longitude]
-                AFYelpAPIClient.shared()?.search(location: queryDict, completion: { result in
-                    strongSelf.process(result: result)
-                })
             case .failure:
-                let query = YLPSearchQuery(location: "5550 West Executive Dr. Tampa, FL 33609")
-                AFYelpAPIClient.shared().search(with: query, completion: {  result in
-                    strongSelf.process(result: result)
-                })
+                print("location not available")
             }
+            strongSelf.tableView.dataSource = strongSelf.dataSource
+            strongSelf.tableView.delegate = strongSelf.dataSource
         }
         LocationService.main.getCurrentLocation()
     }
@@ -70,7 +77,8 @@ class MasterViewController: UITableViewController {
     private func process(result: Result<CCYelpPSearch,CCError>){
         switch result{
         case .success(let searchResults):
-            dataSource?.setObjects(businesses: searchResults.businesses)
+            print("total: \(searchResults.total)")
+            dataSource?.setObjects(businesses: searchResults.businesses, withTotalCount: searchResults.total)
         case .failure(let error):
             print(error)
         }
@@ -83,6 +91,8 @@ class MasterViewController: UITableViewController {
     
     func registerCells(){
         tableView.register(UINib(nibName: "BusinessCell", bundle: Bundle.main), forCellReuseIdentifier: "businessCell")
+        tableView.register(UINib(nibName: "LoadingCell", bundle: Bundle.main), forCellReuseIdentifier: "loadingCell")
+        tableView.estimatedRowHeight = UITableView.automaticDimension
     }
     
     // MARK: - Navigation

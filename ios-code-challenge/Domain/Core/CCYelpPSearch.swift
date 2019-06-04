@@ -15,7 +15,7 @@ struct CCYelpPSearch{
     init(data: [String:Any?]){
         businesses = []
         if let businessesData = data["businesses"] as? [[String:Any]]{
-            businesses = businessesData.compactMap({CCYelpBusiness(data: $0)}).sorted(by: {$0.distance < $1.distance})
+            businesses = businessesData.compactMap({CCYelpBusiness(data: $0)})
         }
         total = data["total"] as? Int ?? 0
     }
