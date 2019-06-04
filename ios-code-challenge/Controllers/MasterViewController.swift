@@ -92,7 +92,6 @@ class MasterViewController: UITableViewController {
     func registerCells(){
         tableView.register(UINib(nibName: "BusinessCell", bundle: Bundle.main), forCellReuseIdentifier: "businessCell")
         tableView.register(UINib(nibName: "LoadingCell", bundle: Bundle.main), forCellReuseIdentifier: "loadingCell")
-        tableView.estimatedRowHeight = UITableView.automaticDimension
     }
     
     // MARK: - Navigation

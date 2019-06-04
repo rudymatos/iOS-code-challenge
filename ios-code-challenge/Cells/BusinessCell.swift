@@ -12,7 +12,7 @@ class BusinessCell: UITableViewCell {
 
     @IBOutlet weak var nameLBL: UILabel!
     @IBOutlet weak var ratingLBL: UILabel!
-    @IBOutlet weak var reviewCountLBL: UILabel!
+    @IBOutlet weak var priceLBL: UILabel!
     @IBOutlet weak var distanceLBL: UILabel!
     @IBOutlet weak var categoriesLBL: UILabel!
     @IBOutlet weak var businessIV: UIImageView!
@@ -35,13 +35,11 @@ class BusinessCell: UITableViewCell {
     func configureView(business: CCYelpBusiness){
         self.business = business
         nameLBL.text = business.name
-        ratingLBL.text = "\(business.rating)"
-        reviewCountLBL.text = "\(business.reviewCount)"
-        distanceLBL.text = "Distance: \(business.distance)"
+        ratingLBL.text = "\(business.rating)/5"
+        priceLBL.text = business.price
+        distanceLBL.text = "\(String(format: "%.2f", business.distance/1000)) miles away"
         categoriesLBL.text = business.categories.compactMap({$0.title}).joined(separator: ",")
-        if let imageURL = business.imageThumbnail{
-            businessIV.loadImage(withURL: imageURL)
-        }
+        businessIV.loadImage(fromURL: business.imageThumbnail)
     }
     
 }

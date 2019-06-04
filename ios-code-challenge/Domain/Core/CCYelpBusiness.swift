@@ -18,6 +18,9 @@ class CCYelpBusiness: NSObject{
     var price: String
     var distance: Double
     var imageThumbnail : URL?
+    var website: URL?
+    var phone : String?
+    var displayPhone: String?
     var location: CCYelpLocation?
     
     struct CCYelpLocation{
@@ -54,13 +57,18 @@ class CCYelpBusiness: NSObject{
         if let categories = data["categories"] as? [[String:Any]] {
             self.categories = categories.compactMap({CCYelpCategory.init(data: $0)})
         }
+        if let website = data["url"] as? String{
+            self.website = URL(string: website)
+        }
         self.rating = data["rating"] as? Double ?? 0
+        self.phone = data["phone"] as? String
+        self.displayPhone = data["display_phone"] as? String
         self.reviewCount = data["review_count"] as? Int  ?? 0
         if let imageThumbnailURL = data["image_url"] as? String{
                 self.imageThumbnail = URL(string: imageThumbnailURL)
         }
         self.distance = data["distance"] as? Double ?? 0
-        self.price = data["price"] as? String ?? ""
+        self.price = data["price"] as? String ?? "NA"
         if let coordinates = data["coordinates"] as? [String: Double], let latitude = coordinates["latitude"], let longitude = coordinates["longitude"]{
             self.location = CCYelpLocation(latitude: latitude, longitude: longitude)
         }

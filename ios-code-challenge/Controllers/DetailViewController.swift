@@ -7,14 +7,13 @@
 //
 
 import UIKit
+import MapKit
 
 class DetailViewController: UIViewController {
 
     @IBOutlet weak var businessIV: UIImageView!
     @IBOutlet weak var nameLBL: UILabel!
     @IBOutlet weak var categoriesLBL: UILabel!
-    @IBOutlet weak var reviewCountLBL: UILabel!
-    @IBOutlet weak var distanceLBL: UILabel!
     @IBOutlet weak var priceLBL: UILabel!
     @IBOutlet weak var ratingLBL: UILabel!
     
@@ -37,14 +36,10 @@ class DetailViewController: UIViewController {
     
     private func configureView() {
         guard let business = business else { return }
-        if let imageURL =  business.imageThumbnail{
-            businessIV.loadImage(withURL: imageURL)
-        }
+        businessIV.loadImage(fromURL: business.imageThumbnail)
         nameLBL.text = business.name
         ratingLBL.text = "\(business.rating)"
-        reviewCountLBL.text = "\(business.reviewCount)"
-        distanceLBL.text = "\(business.distance)"
-        priceLBL.text = business.price
+        priceLBL.text = "\(business.price.count)"
         categoriesLBL.text = business.categories.compactMap({$0.title}).joined(separator: ",")
         _favorite = FavoriteService.main.isBusinessFavorite(withId: business.identifier)
         updateFavoriteBarButtonState()
@@ -71,4 +66,35 @@ class DetailViewController: UIViewController {
         NotificationCenter.default.post(name: Notification.Name("favoriteModified"), object: nil, userInfo: nil)
         updateFavoriteBarButtonState()
     }
+    
+    @IBAction func goToWebsite(_ sender: UIButton) {
+        open(url: business?.website)
+    }
+    
+    @IBAction func callPlace(_ sender: UIButton) {
+        guard var phone = business?.phone else {return}
+        let invalidCharacters = ["-"," ","(",")","+"]
+        invalidCharacters.forEach({phone = phone.replacingOccurrences(of: $0, with: "")})
+        open(url: URL(string: "tel://\(phone)"))
+    }
+    
+    
+    @IBAction func showInMaps(_ sender: UIButton) {
+        
+        guard let placeLocation = business?.location else{
+            return
+        }
+        let destination = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: placeLocation.latitude, longitude: placeLocation.longitude)))
+        destination.name = business?.name ?? "Destination"
+        destination.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving])
+        
+    }
+    
+    private func open(url: URL?){
+        guard let url = url else {
+            return
+        }
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+    }
+    
 }

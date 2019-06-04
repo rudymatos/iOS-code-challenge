@@ -17,7 +17,7 @@ class FavoriteService{
     }
 
     func getAllFavorites() -> [CCYelpBusiness]{
-        guard let favorites = userDefaults.object(forKey: "favorites") as? [[String:Any?]] else{
+        guard let data = userDefaults.object(forKey: "favorites") as? Data, let unarchiver = NSKeyedUnarchiver.unarchiveObject(with: data), let favorites = unarchiver as? [[String:Any?]] else{
             return []
         }
         return favorites.compactMap({CCYelpBusiness(data: $0)})
@@ -35,7 +35,8 @@ class FavoriteService{
   
     private func save(favorites: [CCYelpBusiness]){
         let favoritesDict = favorites.compactMap({$0.getObjectDic()})
-        userDefaults.set(favoritesDict, forKey: "favorites")
+        let archiver = NSKeyedArchiver.archivedData(withRootObject: favoritesDict)
+        userDefaults.set(archiver, forKey: "favorites")
         userDefaults.synchronize()
     }
     
